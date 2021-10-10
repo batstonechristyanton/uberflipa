@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { FoodsModule } from './foods/foods.module';
 import { NutrientsModule } from './nutrients/nutrients.module';
 import { UserFoodsModule } from './user-foods/user-foods.module';
+import { UserReportController } from './user-report/user-report.controller';
+import { UserReportModule } from './user-report/user-report.module';
 
 @Module({
   imports: [
@@ -14,8 +16,9 @@ import { UserFoodsModule } from './user-foods/user-foods.module';
     UserFoodsModule,
     FoodsModule,
     NutrientsModule,
+    UserReportModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UserReportController],
   providers: [AppService],
 })
 export class AppModule {}

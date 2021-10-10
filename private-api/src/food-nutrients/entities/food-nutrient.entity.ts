@@ -1,4 +1,13 @@
-import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { UserReport } from '../../user-report/entites/user-report-entity';
+import {
+  Entity,
+  BaseEntity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity({ name: 'food_nutrients' })
 export class FoodNutrient extends BaseEntity {
@@ -19,4 +28,8 @@ export class FoodNutrient extends BaseEntity {
 
   @Column('varchar', { length: 255, name: 'footnote' })
   footnote: string;
+
+  @ManyToMany(() => UserReport, (userReport) => userReport.foodNutrient) 
+  @JoinTable()
+  userReportToFoodNutrient: UserReport[];
 }

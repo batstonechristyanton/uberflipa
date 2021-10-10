@@ -1,4 +1,11 @@
-import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+} from 'typeorm';
+import { UserReport } from '../../user-report/entites/user-report-entity';
 
 @Entity({ name: 'nutrients' })
 export class Nutrient extends BaseEntity {
@@ -16,4 +23,7 @@ export class Nutrient extends BaseEntity {
 
   @Column('decimal', { precision: 6, scale: 1, name: 'nutrient_code' })
   nutrientCode!: number;
+
+  @OneToMany(() => UserReport, (userReport) => userReport.nutrient)
+  userReportToNutreint!: UserReport[];
 }

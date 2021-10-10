@@ -1,12 +1,15 @@
 import { Food } from '../../foods/entities/food.entity';
 import { User } from '../../users/entities/user.entity';
+import { UserReport } from '../../user-report/entites/user-report-entity';
 import {
   Entity,
   BaseEntity,
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
+  ManyToMany,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'user_foods' })
@@ -30,4 +33,7 @@ export class UserFood extends BaseEntity {
   @ManyToOne(() => User, (user) => user.userFoods)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => UserReport, (userReport) => userReport.userFood)
+  userReportToUserFood: UserReport[];
 }
