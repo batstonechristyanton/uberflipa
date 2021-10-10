@@ -7,7 +7,6 @@ import { FoodsModule } from './foods/foods.module';
 import { NutrientsModule } from './nutrients/nutrients.module';
 import { UserFoodsModule } from './user-foods/user-foods.module';
 import { UserReportController } from './user-report/user-report.controller';
-import { UserReportModule } from './user-report/user-report.module';
 
 @Module({
   imports: [
@@ -16,7 +15,6 @@ import { UserReportModule } from './user-report/user-report.module';
     UserFoodsModule,
     FoodsModule,
     NutrientsModule,
-    UserReportModule,
   ],
   controllers: [AppController, UserReportController],
   providers: [AppService],
