@@ -9,7 +9,8 @@ export default class Users extends React.Component {
 
   state = {
     user: {},
-    userFoods: []
+    userFoods: [], 
+    doesUserExist : false
   }
 
   async addFood(foodId) {
@@ -37,7 +38,7 @@ export default class Users extends React.Component {
     this.setState({
       userFoods: [...this.state.userFoods, response.data]
     });
-  }
+  } 
 
   async searchFood(search) {
     const response = await axios.get(`${process.env.REACT_APP_PUBLIC_API_URL}/foods?search=${search}`)
@@ -56,7 +57,7 @@ export default class Users extends React.Component {
 
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_PUBLIC_API_URL}/users/${this.props.match.params.userId}`).then((response) => {
-      this.setState({user: response.data});
+      this.setState({user: response.data}); 
     })
     
     axios.get(`${process.env.REACT_APP_PUBLIC_API_URL}/users/${this.props.match.params.userId}/foods`).then((response) => {
@@ -64,42 +65,54 @@ export default class Users extends React.Component {
     });
   }
 
-  render() {
-    return (
-      <div>
-        <h1>User information</h1>
-        <p>ID: {this.state.user.id}</p>
-        <p>Name: {this.state.user.name}</p>
-        <p>Email: {this.state.user.email}</p>
-
-        <SearchDropdown
-          inputId='food-search'
-          inputPlaceholder='Search for foods...'
-          dropdownId='searched-foods'
-          optionClassName='food'
-          optionTextField='description'
-          optionIdField='id'
-          onInputChange={this.searchFood.bind(this)}
-          onOptionClick={this.addFood.bind(this)}
-        />
-
-        <h2>Foods</h2>
-        <table>
-          <thead>
-            <tr><th>ID</th><th>Description</th><th>Publication date</th><th>Weekly servings</th><th>Actions</th></tr>
-          </thead>
-          <tbody>
-            {this.state.userFoods.map(userFood =>
-              <tr key={userFood.id}>
-                <td>{userFood.food.id}</td>
-                <td>{userFood.food.description}</td>
-                <td>{userFood.food.publicationDate}</td>
-                <td>{userFood.servingsPerWeek ?? 0}</td>
-                <td><button onClick={() => this.removeFood(userFood.food.id)}>Remove</button></td>
-              </tr>)}
-          </tbody>
-        </table>
-      </div>
-    )
+  render() { 
+    const conditionforUserID = this.state.user.id != this.props.match.params.userId;
+    let text; 
+    if(conditionforUserID){
+      return (
+        <div>
+          <h1>User information</h1>
+          <p> This user id was not found{this.props.match.params.userId}</p> 
+        </div>
+      )
+    } else {       
+      return (
+        <div>
+          <h1>User information</h1>
+          <p>ID: {this.state.user.id}</p>
+          <p>Name: {this.state.user.name}</p>
+          <p>Email: {this.state.user.email}</p> 
+          <p>Email: {text}</p>
+  
+          <SearchDropdown
+            inputId='food-search'
+            inputPlaceholder='Search for foods...'
+            dropdownId='searched-foods'
+            optionClassName='food'
+            optionTextField='description'
+            optionIdField='id' 
+            onInputChange={this.searchFood.bind(this)}
+            onOptionClick={this.addFood.bind(this)}
+          />
+  
+          <h2>Foods</h2>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>Description</th><th>Publication date</th><th>Weekly servings</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              {this.state.userFoods.map(userFood =>
+                <tr key={userFood.id}>
+                  <td>{userFood.food.id}</td>
+                  <td>{userFood.food.description}</td>
+                  <td>{userFood.food.publicationDate}</td>
+                  <td>{userFood.servingsPerWeek ?? 0}</td>
+                  <td><button onClick={() => this.removeFood(userFood.food.id)}>Remove</button></td>
+                </tr>)}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
   }
 }

@@ -11,8 +11,9 @@ export default class Users extends React.Component {
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_PUBLIC_API_URL}/users`)
       .then(res => {
-        const users = res.data;
-        this.setState({users});
+        const users = res.data; 
+        this.setState({users}); 
+      
       });
   }
 
