@@ -6,9 +6,7 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  ManyToMany,
   JoinColumn,
-  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'user_foods' })
