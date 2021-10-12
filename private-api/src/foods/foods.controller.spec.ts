@@ -49,7 +49,6 @@ describe('FoodsController', () => {
     foodService = module.get<FoodsService>(FoodsService);
     foodController = module.get<FoodsController>(FoodsController);
   });
-
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
@@ -60,4 +59,5 @@ describe('FoodsController', () => {
       ...mockFoodService,
     });
   });
+
 });
