@@ -19,5 +19,5 @@ export class User extends BaseEntity {
   email: string;
 
   @OneToMany(() => UserFood, (userFood) => userFood.user)
-  userFoods: UserFood[];
+  userFoods!: UserFood[];
 }

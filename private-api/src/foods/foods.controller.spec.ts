@@ -25,8 +25,13 @@ describe('FoodsController', () => {
 
     controller = module.get<FoodsController>(FoodsController);
   });
-
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
+  // it('should create a new food', () => {
+  //   expect(controller.create({ description: 'test' })).toEqual({
+  //     id: expect.any(Number),
+  //     description: 'test',
+  //   });
+  // });
 });
