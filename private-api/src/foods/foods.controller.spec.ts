@@ -14,15 +14,16 @@ const mockFoodService = {
       id: 584334,
       ...createFoodDto,
     };
-  }),
-};
-const mockRemoveFood = {
-  remove: jest.fn().mockImplementation((id: number) => {
+  }), 
+
+  remove: jest.fn().mockImplementation((id:number) => {
     return {
-      id: 155555,
+      id: id,
     };
-  }),
+  })
 };
+
+
 const mockRepository = jest.fn(() => ({
   metadata: {
     columns: [],
@@ -58,6 +59,12 @@ describe('FoodsController', () => {
       id: expect.any(Number),
       ...mockFoodService,
     });
-  });
+  });  
 
+  // it('should remove an id  ', async () => {
+  //   expect(foodController.findOne(mockFoodService)).toEqual({
+  //     id:1,
+      
+  //   });
+  // }); 
 });
