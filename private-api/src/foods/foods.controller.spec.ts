@@ -15,9 +15,22 @@ const mockFoodService = {
       ...createFoodDto,
     };
   }),
+
+  findAll: jest.fn().mockImplementation(() => {
+    return {
+      search: 'test the the db',
+      page: 1,
+      limit: 2,
+    };
+  }),
 };
 const mockRemoveFood = {
   remove: jest.fn().mockImplementation((id: number) => {
+    return {
+      id: 155555,
+    };
+  }),
+  findOne: jest.fn().mockImplementation((id: number) => {
     return {
       id: 155555,
     };
@@ -60,4 +73,25 @@ describe('FoodsController', () => {
       ...mockFoodService,
     });
   });
+
+  // it('should create a food ', () => {
+  //   expect(foodController.findAll(mockFoodService)).toEqual({
+  //     id: expect.any(Number),
+  //     ...mockFoodService,
+  //   });
+  // });
+
+  // it('should remove food id ', () => {
+  //   expect(foodController.remove(mockRemoveFood)).toEqual({
+  //     id: expect.any(Number),
+  //     ...mockRemoveFood,
+  //   });
+  // });
+
+  // it('should grab one id id ', () => {
+  //   expect(foodController.findOne(mockRemoveFood)).toEqual({
+  //     id: expect.any(Number),
+  //     ...mockRemoveFood,
+  //   });
+  // });
 });
