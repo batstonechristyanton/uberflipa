@@ -44,8 +44,6 @@ const mockRepository = jest.fn(() => ({
 }));
 
 describe('FoodsController', () => {
-  let controller: FoodsController;
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FoodsController],
@@ -58,12 +56,11 @@ describe('FoodsController', () => {
       .useValue(mockFoodService)
       .compile();
 
-    controller = module.get<FoodsController>(FoodsController);
     foodService = module.get<FoodsService>(FoodsService);
     foodController = module.get<FoodsController>(FoodsController);
   });
   it('should be defined', () => {
-    expect(controller).toBeDefined();
+    expect(foodController).toBeDefined();
   });
 
   it('should create a food ', () => {
@@ -73,7 +70,7 @@ describe('FoodsController', () => {
     });
   });
 
-  // it('should create a food ', () => {
+  // it('should find all foods ', () => {
   //   expect(foodController.findAll(mockFoodService)).toEqual({
   //     id: expect.any(Number),
   //     ...mockFoodService,
